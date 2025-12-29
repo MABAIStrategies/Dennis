@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dennis | The Fade GOAT - Kentlands Barber</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&amp;family=Roboto:wght@300;400;500;700&amp;display=swap" rel="stylesheet">
+    
+    <!-- Google Maps Bootstrap -->
+    <!-- This script loads the Google Maps API. It is critical for the Location section. -->
+    <script>
+    (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
+      key: "AIzaSyBB_SVKlC9CcEjDt1H01_B7Gjmb8FiIaGw",
+      v: "weekly",
+  });
+    </script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Roboto', 'sans-serif'],
+                        header: ['Oswald', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#1a1a1a',
+                            gold: '#C5A059',
+                            gray: '#2d2d2d',
+                            light: '#f4f4f4'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: #C5A059;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #C5A059;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-brand-dark text-white font-sans antialiased selection:bg-brand-gold selection:text-black">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 backdrop-blur-sm border-b border-white/10 transition-all duration-300 bg-brand-dark/95 py-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-brand-gold text-3xl">content_cut</span>
+                    <div class="flex flex-col">
+                        <span class="font-header text-2xl font-bold tracking-wider text-white">DENNIS</span>
+                        <span class="text-[10px] text-brand-gold tracking-[0.2em] uppercase">The Skin Fade Specialist</span>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#about" class="hover:text-brand-gold transition-colors duration-300 font-medium tracking-wide">ABOUT</a>
+                        <a href="#services" class="hover:text-brand-gold transition-colors duration-300 font-medium tracking-wide">SERVICES</a>
+                        <a href="#gallery" class="hover:text-brand-gold transition-colors duration-300 font-medium tracking-wide">WORK</a>
+                        <a href="#location" class="hover:text-brand-gold transition-colors duration-300 font-medium tracking-wide">LOCATION</a>
+                        <button onclick="openBooking()" class="bg-brand-gold text-black px-6 py-2 rounded font-header font-bold hover:bg-white transition-all duration-300 transform hover:scale-105">BOOK NOW</button>
+                    </div>
+                </div>
+                <div class="-mr-2 flex md:hidden">
+                    <button onclick="toggleMobileMenu()" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
+                        <span class="material-symbols-outlined">menu</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-brand-dark border-t border-white/10">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium hover:text-brand-gold">ABOUT</a>
+                <a href="#services" class="block px-3 py-2 rounded-md text-base font-medium hover:text-brand-gold">SERVICES</a>
+                <a href="#gallery" class="block px-3 py-2 rounded-md text-base font-medium hover:text-brand-gold">WORK</a>
+                <a href="#location" class="block px-3 py-2 rounded-md text-base font-medium hover:text-brand-gold">LOCATION</a>
+                <button onclick="openBooking()" class="w-full text-left px-3 py-2 text-brand-gold font-bold">BOOK APPOINTMENT</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="backdrop1.png" alt="Precision Skin Fade" class="w-full h-full object-cover opacity-60">
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/50 to-transparent"></div>
+        </div>
+        
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-16">
+            <div class="fade-in-up">
+                <span class="inline-block border border-brand-gold/50 rounded-full px-4 py-1 text-sm text-brand-gold mb-6 tracking-widest uppercase bg-black/30 backdrop-blur-sm">
+                    Located inside Bearded Goat • Kentlands
+                </span>
+                <h1 class="font-header text-6xl md:text-8xl font-bold uppercase tracking-tighter mb-4 leading-tight">
+                    The Architect<br>of the <span class="text-brand-gold">Fade</span>
+                </h1>
+                <p class="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-light">
+                    Traded blueprints for clippers. Bringing engineering precision to every lineup, taper, and skin fade in Gaithersburg.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <button onclick="openBooking()" class="w-full sm:w-auto px-8 py-4 bg-brand-gold text-black font-header font-bold text-xl rounded hover:bg-white hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(197,160,89,0.3)]">
+                        GET THE CUT
+                    </button>
+                    <a href="#services" class="w-full sm:w-auto px-8 py-4 border border-white/30 hover:border-brand-gold hover:text-brand-gold font-header font-bold text-xl rounded transition-all duration-300 backdrop-blur-sm">
+                        VIEW SERVICES
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-brand-dark relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <div class="relative">
+                    <div class="absolute -top-4 -left-4 w-24 h-24 border-t-4 border-l-4 border-brand-gold/30"></div>
+                    <div class="absolute -bottom-4 -right-4 w-24 h-24 border-b-4 border-r-4 border-brand-gold/30"></div>
+                    <img src="headshot1.png" alt="Dennis the Barber" class="w-full h-auto rounded-lg shadow-2xl filter grayscale hover:grayscale-0 transition-all duration-700 relative z-10">
+                </div>
+                <div>
+                    <h2 class="font-header text-4xl md:text-5xl font-bold mb-6 text-white uppercase">
+                        From Blueprints to <span class="text-brand-gold">Buzz Cuts</span>
+                    </h2>
+                    <p class="text-gray-400 text-lg mb-6 leading-relaxed">
+                        I used to work as a building engineer, analyzing blueprints and ensuring structural perfection. Now? I apply that same obsession with detail to your hairline.
+                    </p>
+                    <p class="text-gray-400 text-lg mb-8 leading-relaxed">
+                        Based out of the renowned <strong class="text-white">Bearded Goat Barber</strong> in the Kentlands, I specialize in the "Skin Fade"—a cut that requires absolute precision to look right. Whether we're talking JDM car builds, fishing spots, or the best grilling techniques, the conversation is always as good as the cut.
+                    </p>
+                    <div class="grid grid-cols-2 gap-6 mb-8">
+                        <div class="bg-brand-gray p-4 rounded border-l-2 border-brand-gold">
+                            <span class="block text-3xl font-header font-bold text-white mb-1">5+</span>
+                            <span class="text-sm text-gray-500 uppercase tracking-wider">Years Experience</span>
+                        </div>
+                        <div class="bg-brand-gray p-4 rounded border-l-2 border-brand-gold">
+                            <span class="block text-3xl font-header font-bold text-white mb-1">100%</span>
+                            <span class="text-sm text-gray-500 uppercase tracking-wider">Precision Rate</span>
+                        </div>
+                    </div>
+                    <a href="https://beardedgoatbarber.com/kentlands/our-barbers-in-kentlands/" target="_blank" class="inline-flex items-center text-brand-gold hover:text-white transition-colors">
+                        <span class="material-symbols-outlined mr-2">link</span>
+                        Verify Profile at Bearded Goat
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-brand-gray">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-header text-4xl md:text-5xl font-bold text-white uppercase tracking-tight mb-4">Service Menu</h2>
+                <div class="w-24 h-1 bg-brand-gold mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div onclick="openBooking('Skin Fade')" class="service-card bg-brand-dark p-8 rounded border border-white/5 transition-all duration-300 cursor-pointer group">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="material-symbols-outlined text-4xl text-brand-gold group-hover:scale-110 transition-transform">content_cut</span>
+                        <span class="font-header text-xl text-brand-gold">$50</span>
+                    </div>
+                    <h3 class="font-header text-2xl font-bold text-white mb-2">The Signature Skin Fade</h3>
+                    <p class="text-gray-400 text-sm mb-4">My specialty. Seamless blend from skin to top. Includes straight razor lineup and hot towel finish.</p>
+                    <div class="w-full bg-white/10 h-[1px] group-hover:bg-brand-gold transition-colors"></div>
+                    <p class="text-right text-xs text-brand-gold mt-4 uppercase tracking-wider font-bold group-hover:translate-x-1 transition-transform">Book Now →</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div onclick="openBooking('Beard Sculpting')" class="service-card bg-brand-dark p-8 rounded border border-white/5 transition-all duration-300 cursor-pointer group">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="material-symbols-outlined text-4xl text-brand-gold group-hover:scale-110 transition-transform">face</span>
+                        <span class="font-header text-xl text-brand-gold">$35</span>
+                    </div>
+                    <h3 class="font-header text-2xl font-bold text-white mb-2">Beard Sculpting</h3>
+                    <p class="text-gray-400 text-sm mb-4">Geometric precision for your beard. Includes shaping, reducing bulk, and razor line-up.</p>
+                    <div class="w-full bg-white/10 h-[1px] group-hover:bg-brand-gold transition-colors"></div>
+                    <p class="text-right text-xs text-brand-gold mt-4 uppercase tracking-wider font-bold group-hover:translate-x-1 transition-transform">Book Now →</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div onclick="openBooking('Full Service')" class="service-card bg-brand-dark p-8 rounded border border-white/5 transition-all duration-300 cursor-pointer group">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="material-symbols-outlined text-4xl text-brand-gold group-hover:scale-110 transition-transform">diamond</span>
+                        <span class="font-header text-xl text-brand-gold">$80</span>
+                    </div>
+                    <h3 class="font-header text-2xl font-bold text-white mb-2">The "Engineer" Combo</h3>
+                    <p class="text-gray-400 text-sm mb-4">Full haircut + Beard Sculpting. The complete overhaul with straight razor finish and premium products.</p>
+                    <div class="w-full bg-white/10 h-[1px] group-hover:bg-brand-gold transition-colors"></div>
+                    <p class="text-right text-xs text-brand-gold mt-4 uppercase tracking-wider font-bold group-hover:translate-x-1 transition-transform">Book Now →</p>
+                </div>
+
+                <!-- Service 4 -->
+                <div onclick="openBooking('Classic Cut')" class="service-card bg-brand-dark p-8 rounded border border-white/5 transition-all duration-300 cursor-pointer group">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="material-symbols-outlined text-4xl text-brand-gold group-hover:scale-110 transition-transform">content_cut</span>
+                        <span class="font-header text-xl text-brand-gold">$45</span>
+                    </div>
+                    <h3 class="font-header text-2xl font-bold text-white mb-2">Classic Gentleman's Cut</h3>
+                    <p class="text-gray-400 text-sm mb-4">Scissor work, side parts, crops. Traditional styles executed with modern texture.</p>
+                    <div class="w-full bg-white/10 h-[1px] group-hover:bg-brand-gold transition-colors"></div>
+                    <p class="text-right text-xs text-brand-gold mt-4 uppercase tracking-wider font-bold group-hover:translate-x-1 transition-transform">Book Now →</p>
+                </div>
+
+                <!-- Service 5 -->
+                <div onclick="openBooking('Hot Towel Shave')" class="service-card bg-brand-dark p-8 rounded border border-white/5 transition-all duration-300 cursor-pointer group">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="material-symbols-outlined text-4xl text-brand-gold group-hover:scale-110 transition-transform">soap</span>
+                        <span class="font-header text-xl text-brand-gold">$45</span>
+                    </div>
+                    <h3 class="font-header text-2xl font-bold text-white mb-2">Hot Towel Shave</h3>
+                    <p class="text-gray-400 text-sm mb-4">Old school luxury. Hot towels, essential oils, and a straight razor close shave.</p>
+                    <div class="w-full bg-white/10 h-[1px] group-hover:bg-brand-gold transition-colors"></div>
+                    <p class="text-right text-xs text-brand-gold mt-4 uppercase tracking-wider font-bold group-hover:translate-x-1 transition-transform">Book Now →</p>
+                </div>
+
+                <!-- Service 6 -->
+                <div onclick="openBooking('Kids Cut')" class="service-card bg-brand-dark p-8 rounded border border-white/5 transition-all duration-300 cursor-pointer group">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="material-symbols-outlined text-4xl text-brand-gold group-hover:scale-110 transition-transform">child_care</span>
+                        <span class="font-header text-xl text-brand-gold">$35</span>
+                    </div>
+                    <h3 class="font-header text-2xl font-bold text-white mb-2">Young G's Cut</h3>
+                    <p class="text-gray-400 text-sm mb-4">For the little ones (Ages 12 and under). Keeps them looking sharp for school or events.</p>
+                    <div class="w-full bg-white/10 h-[1px] group-hover:bg-brand-gold transition-colors"></div>
+                    <p class="text-right text-xs text-brand-gold mt-4 uppercase tracking-wider font-bold group-hover:translate-x-1 transition-transform">Book Now →</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-24 bg-brand-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <h2 class="font-header text-4xl md:text-5xl font-bold text-white uppercase">The Work</h2>
+                    <p class="text-gray-500 mt-2">Sharp. Clean. Consistent.</p>
+                </div>
+                <a href="https://www.instagram.com/" target="_blank" class="hidden sm:flex items-center text-brand-gold hover:text-white transition-colors">
+                    <span class="material-symbols-outlined mr-2">photo_camera</span>
+                    Follow on Instagram
+                </a>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 h-[600px]">
+                <!-- Item 1 (Large) -->
+                <div class="col-span-2 row-span-2 relative group overflow-hidden rounded-lg">
+                    <img src="skinfade.png" alt="Perfect Skin Fade" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <span class="text-brand-gold font-header text-2xl uppercase font-bold tracking-widest border-b-2 border-brand-gold">Skin Fade</span>
+                    </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="relative group overflow-hidden rounded-lg">
+                    <img src="beardwork.png" alt="Beard Lineup" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <span class="text-brand-gold font-header text-lg uppercase font-bold">Beard Work</span>
+                    </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="relative group overflow-hidden rounded-lg">
+                    <img src="classic.png" alt="Classic Style" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <span class="text-brand-gold font-header text-lg uppercase font-bold">Classic</span>
+                    </div>
+                </div>
+                <!-- Item 4 -->
+                <div class="relative group overflow-hidden rounded-lg">
+                    <img src="shave.png" alt="Hot Towel" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <span class="text-brand-gold font-header text-lg uppercase font-bold">Shave</span>
+                    </div>
+                </div>
+                <!-- Item 5 -->
+                <div class="relative group overflow-hidden rounded-lg">
+                    <img src="designwork.png" alt="Design Work" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <span class="text-brand-gold font-header text-lg uppercase font-bold">Designs</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location & Map Section -->
+    <section id="location" class="py-24 bg-brand-gray relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="flex flex-col justify-center">
+                    <h2 class="font-header text-4xl md:text-5xl font-bold text-white uppercase mb-8">Find Me</h2>
+                    <div class="space-y-8">
+                        <div class="flex items-start">
+                            <span class="material-symbols-outlined text-brand-gold text-3xl mr-4 mt-1">storefront</span>
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-1">Bearded Goat Barber</h3>
+                                <p class="text-gray-400">720 Center Point Way<br>Gaithersburg, MD 20878<br>Kentlands Market Square</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="material-symbols-outlined text-brand-gold text-3xl mr-4 mt-1">schedule</span>
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-1">Hours</h3>
+                                <table class="text-gray-400 text-sm">
+                                    <tbody><tr><td class="w-24 py-1">Mon - Thu:</td><td class="text-white">9:00 AM - 7:00 PM</td></tr>
+                                    <tr><td class="w-24 py-1">Fri:</td><td class="text-white">9:00 AM - 7:00 PM</td></tr>
+                                    <tr><td class="w-24 py-1">Sat:</td><td class="text-white">9:00 AM - 5:00 PM</td></tr>
+                                    <tr><td class="w-24 py-1">Sun:</td><td class="text-brand-gold">Closed</td></tr>
+                                </tbody></table>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="material-symbols-outlined text-brand-gold text-3xl mr-4 mt-1">directions_car</span>
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-1">Parking</h3>
+                                <p class="text-gray-400">Ample street parking available on Main St and Center Point Way. Large lot behind the Giant.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="openBooking()" class="mt-12 bg-white text-brand-dark px-8 py-4 font-header font-bold text-xl rounded hover:bg-brand-gold transition-colors w-max shadow-lg">
+                        BOOK APPOINTMENT
+                    </button>
+                </div>
+                <!-- Map Container -->
+                <div class="h-[500px] w-full rounded-xl overflow-hidden shadow-2xl relative border border-white/10">
+                    <!-- Ensure the map container ID "map" exists for the JS to target -->
+                    <div id="map" class="w-full h-full"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="flex items-center justify-center gap-2 mb-6">
+                <span class="material-symbols-outlined text-brand-gold text-2xl">content_cut</span>
+                <span class="font-header text-xl font-bold tracking-wider text-white">DENNIS @ BEARDED GOAT</span>
+            </div>
+            <p class="text-gray-500 text-sm mb-6">© 2025 Dennis Barbering. All rights reserved.<br>Located within Bearded Goat Barber, Gaithersburg MD.</p>
+            <div class="flex justify-center space-x-6">
+                <a href="#" class="text-gray-400 hover:text-brand-gold transition-colors"><span class="material-symbols-outlined">radio_button_unchecked</span></a>
+                <a href="#" class="text-gray-400 hover:text-brand-gold transition-colors"><span class="material-symbols-outlined">alternate_email</span></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Booking Modal (Interactive) -->
+    <div id="bookingModal" class="fixed inset-0 z-[60] hidden">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-sm" onclick="closeBooking()"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-lg bg-brand-gray rounded-xl shadow-2xl border border-white/10 overflow-hidden flex flex-col max-h-[90vh]">
+            <!-- Modal Header -->
+            <div class="bg-brand-dark p-6 border-b border-white/10 flex justify-between items-center">
+                <h3 class="font-header text-2xl font-bold text-white">Book Appointment</h3>
+                <button onclick="closeBooking()" class="text-gray-400 hover:text-white">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            
+            <!-- Wizard Steps -->
+            <div id="bookingContent" class="p-6 overflow-y-auto flex-grow">
+                <!-- Step 1: Service -->
+                <div id="step1" class="space-y-4">
+                    <p class="text-brand-gold text-sm font-bold uppercase tracking-widest mb-4">Step 1: Choose Service</p>
+                    <button onclick="selectService('Skin Fade', 50)" class="w-full p-4 bg-brand-dark rounded border border-white/5 hover:border-brand-gold flex justify-between items-center group transition-all">
+                        <span class="text-white font-medium group-hover:text-brand-gold">The Signature Skin Fade</span>
+                        <span class="text-gray-400 group-hover:text-white">$50</span>
+                    </button>
+                    <button onclick="selectService('Beard Sculpting', 35)" class="w-full p-4 bg-brand-dark rounded border border-white/5 hover:border-brand-gold flex justify-between items-center group transition-all">
+                        <span class="text-white font-medium group-hover:text-brand-gold">Beard Sculpting</span>
+                        <span class="text-gray-400 group-hover:text-white">$35</span>
+                    </button>
+                    <button onclick="selectService('Full Service', 80)" class="w-full p-4 bg-brand-dark rounded border border-white/5 hover:border-brand-gold flex justify-between items-center group transition-all">
+                        <span class="text-white font-medium group-hover:text-brand-gold">The "Engineer" Combo</span>
+                        <span class="text-gray-400 group-hover:text-white">$80</span>
+                    </button>
+                    <button onclick="selectService('Classic Cut', 45)" class="w-full p-4 bg-brand-dark rounded border border-white/5 hover:border-brand-gold flex justify-between items-center group transition-all">
+                        <span class="text-white font-medium group-hover:text-brand-gold">Classic Cut</span>
+                        <span class="text-gray-400 group-hover:text-white">$45</span>
+                    </button>
+                </div>
+
+                <!-- Step 2: Date & Time -->
+                <div id="step2" class="hidden space-y-4">
+                    <p class="text-brand-gold text-sm font-bold uppercase tracking-widest mb-4">Step 2: Select Time</p>
+                    <div class="flex justify-between items-center mb-4 bg-brand-dark p-2 rounded">
+                        <button onclick="changeDate(-1)" class="p-2 text-brand-gold hover:bg-white/10 rounded"><span class="material-symbols-outlined">chevron_left</span></button>
+                        <span id="currentDateDisplay" class="font-header font-bold text-white text-lg">Today</span>
+                        <button onclick="changeDate(1)" class="p-2 text-brand-gold hover:bg-white/10 rounded"><span class="material-symbols-outlined">chevron_right</span></button>
+                    </div>
+                    <div id="timeSlots" class="grid grid-cols-3 gap-2">
+                        <!-- Slots injected by JS -->
+                    </div>
+                    <button onclick="backToStep(1)" class="text-gray-400 text-sm hover:text-white mt-4 flex items-center"><span class="material-symbols-outlined text-sm mr-1">arrow_back</span> Back to Services</button>
+                </div>
+
+                <!-- Step 3: Details -->
+                <div id="step3" class="hidden space-y-4">
+                    <p class="text-brand-gold text-sm font-bold uppercase tracking-widest mb-4">Step 3: Your Info</p>
+                    <div class="bg-brand-dark p-4 rounded mb-4">
+                        <p class="text-gray-400 text-xs uppercase">Summary</p>
+                        <p id="summaryService" class="text-white font-bold text-lg">Service</p>
+                        <p id="summaryTime" class="text-brand-gold">Time</p>
+                    </div>
+                    <input type="text" placeholder="Name" class="w-full bg-brand-dark border border-white/10 rounded p-3 text-white focus:border-brand-gold outline-none">
+                    <input type="tel" placeholder="Phone Number" class="w-full bg-brand-dark border border-white/10 rounded p-3 text-white focus:border-brand-gold outline-none">
+                    <input type="email" placeholder="Email" class="w-full bg-brand-dark border border-white/10 rounded p-3 text-white focus:border-brand-gold outline-none">
+                    <button onclick="completeBooking()" class="w-full bg-brand-gold text-black font-bold font-header text-xl py-3 rounded hover:bg-white transition-colors mt-6">CONFIRM BOOKING</button>
+                    <button onclick="backToStep(2)" class="text-gray-400 text-sm hover:text-white mt-2 flex items-center"><span class="material-symbols-outlined text-sm mr-1">arrow_back</span> Back to Time</button>
+                </div>
+
+                <!-- Step 4: Success -->
+                <div id="step4" class="hidden text-center py-8">
+                    <div class="w-20 h-20 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="material-symbols-outlined text-4xl text-black">check</span>
+                    </div>
+                    <h3 class="font-header text-3xl font-bold text-white mb-2">You're Booked!</h3>
+                    <p class="text-gray-400 mb-8">Thanks for choosing Dennis. See you at the shop.</p>
+                    <div class="bg-brand-dark p-6 rounded text-left inline-block w-full">
+                        <p class="text-gray-500 text-xs uppercase mb-1">Location</p>
+                        <p class="text-white font-bold mb-4">Bearded Goat, 720 Center Point Way</p>
+                        <p class="text-gray-500 text-xs uppercase mb-1">Note</p>
+                        <p class="text-white text-sm">Please arrive 5 minutes early. If you need to cancel, please call the shop.</p>
+                    </div>
+                    <button onclick="closeBooking()" class="mt-8 text-brand-gold font-bold hover:text-white">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Download Code Button -->
+    <button onclick="downloadCode()" class="fixed bottom-6 right-6 z-[100] bg-brand-gold text-black p-4 rounded-full shadow-[0_0_20px_rgba(197,160,89,0.5)] hover:scale-110 hover:rotate-12 transition-all duration-300 group" title="Download Source Code">
+        <span class="material-symbols-outlined text-3xl group-hover:animate-pulse">terminal</span>
+    </button>
+
+    <!-- Map Script & App Logic -->
+    <script>
+        // State
+        let bookingState = {
+            service: null,
+            price: 0,
+            date: new Date(),
+            time: null
+        };
+
+        // Navigation
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Booking Wizard Logic
+        function openBooking(preselectedService = null) {
+            document.getElementById('bookingModal').classList.remove('hidden');
+            if (preselectedService) {
+                // If opening from a specific service button, find its price (mock) and skip to step 2
+                const priceMap = {
+                    'Skin Fade': 50, 'Beard Sculpting': 35, 'Full Service': 80, 
+                    'Classic Cut': 45, 'Hot Towel Shave': 45, 'Kids Cut': 35
+                };
+                selectService(preselectedService, priceMap[preselectedService] || 50);
+            } else {
+                resetSteps();
+            }
+        }
+
+        function closeBooking() {
+            document.getElementById('bookingModal').classList.add('hidden');
+            setTimeout(resetSteps, 300);
+        }
+
+        function resetSteps() {
+            showStep('step1');
+            bookingState = { service: null, price: 0, date: new Date(), time: null };
+        }
+
+        function showStep(stepId) {
+            ['step1', 'step2', 'step3', 'step4'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+            document.getElementById(stepId).classList.remove('hidden');
+        }
+
+        function selectService(name, price) {
+            bookingState.service = name;
+            bookingState.price = price;
+            generateTimeSlots();
+            updateDateDisplay();
+            showStep('step2');
+        }
+
+        function generateTimeSlots() {
+            const container = document.getElementById('timeSlots');
+            container.innerHTML = '';
+            const times = ['10:00 AM', '10:45 AM', '11:30 AM', '1:00 PM', '1:45 PM', '3:00 PM', '3:45 PM', '4:30 PM'];
+            
+            times.forEach(time => {
+                // Randomly disable some slots to look realistic
+                const isTaken = Math.random() > 0.7;
+                const btn = document.createElement('button');
+                btn.className = isTaken 
+                    ? `p-3 rounded border border-white/5 bg-white/5 text-gray-600 cursor-not-allowed`
+                    : `p-3 rounded border border-white/10 bg-brand-dark text-white hover:border-brand-gold hover:text-brand-gold transition-colors`;
+                btn.textContent = time;
+                if (!isTaken) {
+                    btn.onclick = () => selectTime(time);
+                } else {
+                    btn.disabled = true;
+                    btn.innerHTML += '<span class="block text-[10px] mt-1">BOOKED</span>';
+                }
+                container.appendChild(btn);
+            });
+        }
+
+        function updateDateDisplay() {
+            const options = { weekday: 'short', month: 'short', day: 'numeric' };
+            document.getElementById('currentDateDisplay').textContent = bookingState.date.toLocaleDateString('en-US', options);
+        }
+
+        function changeDate(days) {
+            const nextDate = new Date(bookingState.date);
+            nextDate.setDate(bookingState.date.getDate() + days);
+            // Prevent past dates
+            if (nextDate < new Date()) return;
+            bookingState.date = nextDate;
+            updateDateDisplay();
+            generateTimeSlots(); // Regenerate random slots for new day
+        }
+
+        function selectTime(time) {
+            bookingState.time = time;
+            document.getElementById('summaryService').textContent = `${bookingState.service} ($${bookingState.price})`;
+            document.getElementById('summaryTime').textContent = `${bookingState.date.toLocaleDateString('en-US', {weekday: 'short', month: 'short', day: 'numeric'})} @ ${time}`;
+            showStep('step3');
+        }
+
+        function backToStep(stepNum) {
+            showStep(`step${stepNum}`);
+        }
+
+        function completeBooking() {
+            // Fake loading or submission
+            const btn = document.querySelector('#step3 button');
+            const originalText = btn.textContent;
+            btn.textContent = "CONFIRMING...";
+            setTimeout(() => {
+                showStep('step4');
+                btn.textContent = originalText;
+            }, 1000);
+        }
+
+        // Map Initialization
+        async function initMap() {
+            const { Map } = await google.maps.importLibrary("maps");
+            const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
+
+            // Coordinates for Bearded Goat, Kentlands (Approx from search: 720 Center Point Way)
+            const shopPos = { lat: 39.1195, lng: -77.2375 }; 
+
+            const map = new Map(document.getElementById("map"), {
+                center: shopPos,
+                zoom: 16,
+                mapId: 'DEMO_MAP_ID', // Required for advanced markers
+                disableDefaultUI: true,
+                styles: [
+                    { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
+                    { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
+                    { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
+                    {
+                        featureType: "administrative.locality",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#d59563" }],
+                    },
+                    {
+                        featureType: "poi",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#d59563" }],
+                    },
+                    {
+                        featureType: "poi.park",
+                        elementType: "geometry",
+                        stylers: [{ color: "#263c3f" }],
+                    },
+                    {
+                        featureType: "poi.park",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#6b9a76" }],
+                    },
+                    {
+                        featureType: "road",
+                        elementType: "geometry",
+                        stylers: [{ color: "#38414e" }],
+                    },
+                    {
+                        featureType: "road",
+                        elementType: "geometry.stroke",
+                        stylers: [{ color: "#212a37" }],
+                    },
+                    {
+                        featureType: "road",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#9ca5b3" }],
+                    },
+                    {
+                        featureType: "road.highway",
+                        elementType: "geometry",
+                        stylers: [{ color: "#746855" }],
+                    },
+                    {
+                        featureType: "road.highway",
+                        elementType: "geometry.stroke",
+                        stylers: [{ color: "#1f2835" }],
+                    },
+                    {
+                        featureType: "road.highway",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#f3d19c" }],
+                    },
+                    {
+                        featureType: "water",
+                        elementType: "geometry",
+                        stylers: [{ color: "#17263c" }],
+                    },
+                    {
+                        featureType: "water",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#515c6d" }],
+                    },
+                    {
+                        featureType: "water",
+                        elementType: "labels.text.stroke",
+                        stylers: [{ color: "#17263c" }],
+                    },
+                ],
+            });
+
+            // Create Custom Marker Icon
+            const glyph = document.createElement("span");
+            glyph.className = "material-symbols-outlined";
+            glyph.textContent = "content_cut";
+            glyph.style.color = "black";
+            
+            const pin = new PinElement({
+                glyph: glyph,
+                background: "#C5A059",
+                borderColor: "#ffffff",
+                scale: 1.3
+            });
+
+            new AdvancedMarkerElement({
+                map,
+                position: shopPos,
+                content: pin.element,
+                title: "Dennis @ Bearded Goat"
+            });
+        }
+
+        // Initialize Map
+        initMap();
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-brand-dark/95', 'py-0');
+            } else {
+                nav.classList.remove('bg-brand-dark/95', 'py-0');
+            }
+        });
+
+        // Download Code Functionality
+        function downloadCode() {
+            // Get the full HTML content of the page
+            const htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+            
+            // Create a Blob object representing the data as a file
+            const blob = new Blob([htmlContent], { type: 'text/plain' });
+            
+            // Create a temporary anchor element to trigger download
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'dennis_barber_website.txt'; // Name of the downloaded file
+            
+            // Append to body, click, and remove
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            
+            // Release the object URL
+            URL.revokeObjectURL(url);
+        }
+
+    </script>
+
+
+</body></html>
